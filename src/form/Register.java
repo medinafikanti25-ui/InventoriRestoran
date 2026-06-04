@@ -32,6 +32,13 @@ public class Register extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtRegUsername = new javax.swing.JTextField();
+        btnDoRegister = new javax.swing.JButton();
+        txtRegPassword = new javax.swing.JPasswordField();
+        txtRegConfirmPassword = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -47,19 +54,41 @@ public class Register extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Mari Buat Akun mu Sekarang!!");
 
+        jLabel3.setText("Username");
+
+        jLabel4.setText("Password");
+
+        jLabel5.setText("Konfrimas Password");
+
+        btnDoRegister.setText("Register");
+        btnDoRegister.addActionListener(this::btnDoRegisterActionPerformed);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(128, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(127, 127, 127))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(133, 133, 133)
+                        .addGap(215, 215, 215)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(47, Short.MAX_VALUE))
+                        .addGap(50, 50, 50)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3))
+                        .addGap(56, 56, 56)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnDoRegister)
+                            .addComponent(txtRegUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                            .addComponent(txtRegPassword)
+                            .addComponent(txtRegConfirmPassword))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -68,7 +97,21 @@ public class Register extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addContainerGap(371, Short.MAX_VALUE))
+                .addGap(60, 60, 60)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtRegUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtRegPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtRegConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addComponent(btnDoRegister)
+                .addContainerGap(176, Short.MAX_VALUE))
         );
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -109,7 +152,9 @@ public class Register extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,11 +166,74 @@ public class Register extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnDoRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoRegisterActionPerformed
+    String usernameInput = txtRegUsername.getText().trim();
+    String passwordInput = new String(txtRegPassword.getPassword());
+    String confirmPasswordInput = new String(txtRegConfirmPassword.getPassword());
+
+    // 1. Validasi: Pastikan tidak ada kolom yang kosong
+    if (usernameInput.isEmpty() || passwordInput.isEmpty() || confirmPasswordInput.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Semua kolom wajib diisi!", "Registrasi Gagal", javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // 2. Validasi: Pastikan password dan konfirmasi password cocok
+    if (!passwordInput.equals(confirmPasswordInput)) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Konfirmasi password tidak cocok!", "Registrasi Gagal", javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // 3. Proses Simpan ke File Lokal (database_user.txt)
+    java.io.File file = new java.io.File("database_user.txt");
+    
+    try {
+        // Cek dulu apakah username sudah terdaftar di file teks biar gak double
+        if (file.exists()) {
+            java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader(file));
+            String baris;
+            boolean usernameKembar = false;
+            
+            while ((baris = reader.readLine()) != null) {
+                String[] data = baris.split(",");
+                if (data[0].equalsIgnoreCase(usernameInput)) {
+                    usernameKembar = true;
+                    break;
+                }
+            }
+            reader.close();
+            
+            if (usernameKembar) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Username sudah digunakan! Gunakan nama lain.", "Registrasi Gagal", javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        // Tulis data baru ke file teks (true artinya append/menambahkan baris baru di bawahnya)
+        java.io.BufferedWriter writer = new java.io.BufferedWriter(new java.io.FileWriter(file, true));
+        writer.write(usernameInput + "," + passwordInput);
+        writer.newLine(); // Membuat baris baru untuk user berikutnya
+        writer.close();
+
+        // 4. Notifikasi Berhasil
+        javax.swing.JOptionPane.showMessageDialog(this, "Registrasi Berhasil! Akun Anda sudah tersimpan.", "Sukses", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+        // 5. Langsung pindah dan buka halaman Login.java
+        Login loginPage = new Login();
+        loginPage.setVisible(true);
+        this.dispose(); // Tutup halaman register
+
+    } catch (java.io.IOException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Gagal menyimpan data lokal: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+
+    }//GEN-LAST:event_btnDoRegisterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,11 +261,18 @@ public class Register extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDoRegister;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPasswordField txtRegConfirmPassword;
+    private javax.swing.JPasswordField txtRegPassword;
+    private javax.swing.JTextField txtRegUsername;
     // End of variables declaration//GEN-END:variables
 }

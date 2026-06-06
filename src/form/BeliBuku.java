@@ -3,7 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package form;
-
+import config.Koneksi;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Lenovo
@@ -17,35 +21,45 @@ public class BeliBuku extends javax.swing.JFrame {
      */
     public BeliBuku() {
         initComponents();
-    this.setLocationRelativeTo(null); // Biar aplikasi muncul di tengah layar
-    
-    // 1. Konfigurasi awal JScrollBar kustom
-   jScrollBar1.setMinimum(0);
-    jScrollBar1.setMaximum(1200 - 385);
-    
-    // 2. Kita buat variabel tiruan yang bersifat 'final' agar disetujui oleh Mouse Wheel Listener
-    final javax.swing.JScrollBar finalScrollBar = jScrollBar1;
-    
-    // 3. Pasang Mouse Wheel Listener menggunakan variabel final tadi
-    this.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
-        @Override
-        public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
-            // Ambil kecepatan/arah putaran mouse
-            int notches = evt.getWheelRotation();
-            int newValue = finalScrollBar.getValue() + (notches * 15); // 15 adalah kecepatan scroll
-            
-            // Batasi agar scroll tidak kebablasan keluar batas
-            if (newValue < finalScrollBar.getMinimum()) {
-                newValue = finalScrollBar.getMinimum();
-            } else if (newValue > finalScrollBar.getMaximum()) {
-                newValue = finalScrollBar.getMaximum();
-            }
-            
-            // Set nilai baru ke scroll bar kustom
-            finalScrollBar.setValue(newValue);
-        }
-    });
+        tampilDataBuku();
     }
+    private void tampilDataBuku() {
+
+    DefaultTableModel model =
+        (DefaultTableModel) tblBeliBuku.getModel();
+
+    model.setRowCount(0);
+
+    try {
+
+        Connection conn =
+            Koneksi.getConnection();
+
+        Statement st =
+            conn.createStatement();
+
+        ResultSet rs =
+            st.executeQuery("SELECT * FROM buku");
+
+        while(rs.next()) {
+
+            model.addRow(new Object[]{
+                rs.getString("id_Buku"),
+                rs.getString("nama_buku"),
+                rs.getString("penulis"),
+                rs.getInt("stok"),
+                rs.getDouble("harga")
+
+            });
+
+        }
+
+    } catch(Exception e) {
+
+        System.out.println(e.getMessage());
+
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -60,28 +74,36 @@ public class BeliBuku extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollBar1 = new javax.swing.JScrollBar();
         jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblBeliBuku = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
-        jPanel12 = new javax.swing.JPanel();
-        jPanel13 = new javax.swing.JPanel();
-        jPanel14 = new javax.swing.JPanel();
-        jPanel15 = new javax.swing.JPanel();
-        jPanel16 = new javax.swing.JPanel();
-        jPanel17 = new javax.swing.JPanel();
-        jPanel18 = new javax.swing.JPanel();
-        jPanel19 = new javax.swing.JPanel();
-        jPanel20 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        textId = new javax.swing.JTextField();
+        textNama = new javax.swing.JTextField();
+        textJumlahbeli = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -106,9 +128,9 @@ public class BeliBuku extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+                .addGap(14, 14, 14)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 434, Short.MAX_VALUE)
                 .addComponent(jButton6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton5)
@@ -119,43 +141,22 @@ public class BeliBuku extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton5)
-                            .addComponent(jButton6))))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 607, -1));
-
-        jScrollBar1.addAdjustmentListener(this::jScrollBar1AdjustmentValueChanged);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 807, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton6)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(587, 102, 20, -1));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1010, -1));
 
         jButton1.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jButton1.setText("Cari");
         jButton1.addActionListener(this::jButton1ActionPerformed);
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, -1, -1));
 
         jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jTextField1.addActionListener(this::jTextField1ActionPerformed);
@@ -164,89 +165,177 @@ public class BeliBuku extends javax.swing.JFrame {
                 jTextField1KeyReleased(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 109, 261, -1));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 261, -1));
 
         jPanel2.setLayout(new java.awt.CardLayout());
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 277, -1, -1));
 
-        jPanel4.setBackground(new java.awt.Color(204, 255, 255));
-        jPanel4.setLayout(new java.awt.CardLayout());
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 330, 130, 170));
+        jLabel2.setText("Nama Buku");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
 
-        jPanel5.setBackground(new java.awt.Color(204, 255, 255));
+        tblBeliBuku.setBackground(new java.awt.Color(204, 204, 255));
+        tblBeliBuku.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Id Buku", "Nama Buku", "Penulis", "Stok", "Harga"
+            }
+        ));
+        jScrollPane1.setViewportView(tblBeliBuku);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 990, 240));
+
+        jButton2.setText("Clear");
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 670, 120, -1));
+
+        jPanel4.setBackground(new java.awt.Color(0, 0, 102));
+        jPanel4.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel3.setFont(new java.awt.Font("Vivaldi", 1, 48)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Book Store Media");
+
+        jButton7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton7.setText("X");
+        jButton7.addActionListener(this::jButton7ActionPerformed);
+
+        jButton8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton8.setText("-");
+        jButton8.addActionListener(this::jButton8ActionPerformed);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 294, Short.MAX_VALUE)
+                .addComponent(jButton8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton7)
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton7)
+                            .addComponent(jButton8)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel3)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, -1));
+
+        jButton3.setText("Tambah Barang");
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 580, 120, -1));
+
+        jButton4.setText("Edit Barang");
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 610, 120, -1));
+
+        jButton9.setText("Hapus Barang");
+        jButton9.addActionListener(this::jButton9ActionPerformed);
+        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 640, 120, -1));
+
+        jTable2.setBackground(new java.awt.Color(255, 255, 204));
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Id Buku", "Nama Buku", "Jumlah Beli", "Harga"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 560, 760, 190));
+
+        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI Historic", 1, 18)); // NOI18N
+        jLabel5.setText("DAFTAR BUKU YANG TERSEDIA");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(350, 350, 350)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 990, 50));
+
+        jPanel5.setBackground(new java.awt.Color(255, 204, 204));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI Historic", 1, 18)); // NOI18N
+        jLabel6.setText("DAFTAR BUKU YANG DIBELI");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 130, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(350, 350, 350)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 130, 170));
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 990, 50));
 
-        jPanel6.setBackground(new java.awt.Color(204, 204, 255));
-        jPanel6.setLayout(new java.awt.CardLayout());
-        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 130, 170));
+        jLabel4.setText("Id Buku");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 780, 80, -1));
 
-        jPanel7.setBackground(new java.awt.Color(255, 204, 255));
-        jPanel7.setLayout(new java.awt.CardLayout());
-        getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, 130, 170));
+        jLabel7.setText(":");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 780, -1, -1));
 
-        jPanel9.setBackground(new java.awt.Color(255, 204, 204));
-        jPanel9.setLayout(new java.awt.CardLayout());
-        getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 150, 130, 170));
+        jLabel10.setText(":");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 810, 10, -1));
 
-        jPanel8.setBackground(new java.awt.Color(204, 255, 255));
-        jPanel8.setLayout(new java.awt.CardLayout());
-        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 130, 170));
+        jLabel11.setText("Nama Buku");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 810, -1, -1));
 
-        jPanel10.setBackground(new java.awt.Color(255, 204, 204));
-        jPanel10.setLayout(new java.awt.CardLayout());
-        getContentPane().add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, 130, 170));
+        jLabel12.setText("Jumlah Beli");
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 840, -1, -1));
 
-        jPanel11.setBackground(new java.awt.Color(204, 204, 255));
-        jPanel11.setLayout(new java.awt.CardLayout());
-        getContentPane().add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 130, 170));
+        jLabel13.setText(":");
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 840, 10, -1));
 
-        jPanel12.setBackground(new java.awt.Color(255, 204, 255));
-        jPanel12.setLayout(new java.awt.CardLayout());
-        getContentPane().add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, 130, 170));
+        textId.addActionListener(this::textIdActionPerformed);
+        getContentPane().add(textId, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 780, 170, -1));
+        getContentPane().add(textNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 810, 170, -1));
+        getContentPane().add(textJumlahbeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 840, 170, -1));
 
-        jPanel13.setBackground(new java.awt.Color(153, 204, 255));
-        jPanel13.setLayout(new java.awt.CardLayout());
-        getContentPane().add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 130, 170));
-
-        jPanel14.setBackground(new java.awt.Color(153, 153, 255));
-        jPanel14.setLayout(new java.awt.CardLayout());
-        getContentPane().add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 510, 130, 170));
-
-        jPanel15.setBackground(new java.awt.Color(204, 153, 255));
-        jPanel15.setLayout(new java.awt.CardLayout());
-        getContentPane().add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 510, 130, 170));
-
-        jPanel16.setBackground(new java.awt.Color(255, 153, 153));
-        jPanel16.setLayout(new java.awt.CardLayout());
-        getContentPane().add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 510, 130, 170));
-
-        jPanel17.setBackground(new java.awt.Color(255, 204, 153));
-        jPanel17.setLayout(new java.awt.CardLayout());
-        getContentPane().add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 690, 130, 170));
-
-        jPanel18.setBackground(new java.awt.Color(255, 255, 153));
-        jPanel18.setLayout(new java.awt.CardLayout());
-        getContentPane().add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 690, 130, 170));
-
-        jPanel19.setBackground(new java.awt.Color(153, 255, 204));
-        jPanel19.setLayout(new java.awt.CardLayout());
-        getContentPane().add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 690, 130, 170));
-
-        jPanel20.setBackground(new java.awt.Color(0, 204, 204));
-        jPanel20.setLayout(new java.awt.CardLayout());
-        getContentPane().add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 690, 130, 170));
+        jLabel14.setText("note: tolong yang bagian dafftar buku yang dibeli tabelnya beda sama daftar buku tersedia,dan tambahkan kalkulator referensi aku kirim di wa");
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 900, -1, -1));
 
         getAccessibleContext().setAccessibleName("panelKonten");
         getAccessibleContext().setAccessibleDescription("");
@@ -278,11 +367,21 @@ public class BeliBuku extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jTextField1KeyReleased
 
-    private void jScrollBar1AdjustmentValueChanged(java.awt.event.AdjustmentEvent evt) {//GEN-FIRST:event_jScrollBar1AdjustmentValueChanged
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        int value = jScrollBar1.getValue();
-    
-    }//GEN-LAST:event_jScrollBar1AdjustmentValueChanged
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void textIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textIdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -311,30 +410,38 @@ public class BeliBuku extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollBar jScrollBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tblBeliBuku;
+    private javax.swing.JTextField textId;
+    private javax.swing.JTextField textJumlahbeli;
+    private javax.swing.JTextField textNama;
     // End of variables declaration//GEN-END:variables
 }

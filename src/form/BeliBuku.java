@@ -104,6 +104,7 @@ public class BeliBuku extends javax.swing.JFrame {
         textNama = new javax.swing.JTextField();
         textJumlahbeli = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
+        jButton10 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -337,6 +338,10 @@ public class BeliBuku extends javax.swing.JFrame {
         jLabel14.setText("note: tolong yang bagian dafftar buku yang dibeli tabelnya beda sama daftar buku tersedia,dan tambahkan kalkulator referensi aku kirim di wa");
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 900, -1, -1));
 
+        jButton10.setText("Home");
+        jButton10.addActionListener(this::jButton10ActionPerformed);
+        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 90, -1, -1));
+
         getAccessibleContext().setAccessibleName("panelKonten");
         getAccessibleContext().setAccessibleDescription("");
 
@@ -383,6 +388,15 @@ public class BeliBuku extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textIdActionPerformed
 
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    
+    Home halamanHome = new Home();
+    
+    halamanHome.setVisible(true);
+    this.dispose();
+
+    }//GEN-LAST:event_jButton10ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -410,6 +424,7 @@ public class BeliBuku extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
